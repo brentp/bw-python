@@ -34,32 +34,6 @@ class BigWig(object):
             yield Interval(chrom, intervals.start[i], intervals.start[i] + 1, intervals.value[i])
         lib.bwDestroyOverlappingIntervals(intervals)
 
-"""
-typedef struct {
-    uint32_t l; /**<Number of intervals held*/
-    uint32_t m; /**<Maximum number of values/intervals the struct can hold*/
-    uint32_t *start; /**<The start positions (o-based half open)*/
-    uint32_t *end; /**<The end positions (0-based half open)*/
-    float *value; /**<The value associated with each position*/
-} bwOverlappingIntervals_t;
-
-  void printIntervals(bwOverlappingIntervals_t *ints, uint32_t start) {
-      uint32_t i;
-      if(!ints) return;
-      for(i=0; i<ints->l; i++) {
-          if(ints->start && ints->end) {
-              printf("Interval %"PRIu32"\t%"PRIu32"-%"PRIu32": %f\n",i, ints->start[i], ints->end[i], ints->value[i]);
-          } else if(ints->start) {
-              printf("Interval %"PRIu32"\t%"PRIu32"-%"PRIu32": %f\n",i, ints->start[i], ints->start[i]+1, ints->value[i]);
-          } else {
-              printf("Interval %"PRIu32"\t%"PRIu32"-%"PRIu32": %f\n",i, start+i, start+i+1, ints->value[i]);
-          }
-      }
-  }
-
-
-"""
-
 if __name__ == "__main__":
     import doctest
     import sys
