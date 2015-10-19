@@ -1,0 +1,6 @@
+bw/*.so
+bw/_b*
+*.pyc
+libBigWig/docs/
+build
+*.egg-info
