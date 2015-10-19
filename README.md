@@ -1,4 +1,4 @@
-python wrapper to Devon Ryan's bigwig library using cffi
+python wrapper to [Devon Ryan's bigwig library](https://github.com/dpryan79/libBigWig) using cffi
 
 ```Python
 >>> b = BigWig("libBigWig/test/test.bw")
