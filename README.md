@@ -1,6 +1,7 @@
 python wrapper to [Devon Ryan's bigwig library](https://github.com/dpryan79/libBigWig) using cffi
 
 ```Python
+>>> from bw import BigWig
 >>> b = BigWig("libBigWig/test/test.bw")
 >>> b
 BigWig('libBigWig/test/test.bw')
