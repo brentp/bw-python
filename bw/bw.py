@@ -36,7 +36,7 @@ class BigWig(object):
     """
 
     def __init__(self, path):
-        self.bw = lib.bwOpen(path, ffi.NULL)
+        self.bw = lib.bwOpen(path.encode(), ffi.NULL)
         self.path = path
 
     def close(self):
@@ -46,13 +46,13 @@ class BigWig(object):
         return "%s('%s')" % (self.__class__.__name__, self.path)
 
     def __call__(self, chrom, start, end, includeNA=False):
-        intervals = lib.bwGetValues(self.bw, chrom, start, end, int(includeNA))
+        intervals = lib.bwGetValues(self.bw, chrom.encode(), start, end, int(includeNA))
         for i in range(intervals.l):
             yield Interval(chrom, intervals.start[i], intervals.start[i] + 1, intervals.value[i])
         lib.bwDestroyOverlappingIntervals(intervals)
 
     def values(self, chrom, start, end, includeNA=True):
-        intervals = lib.bwGetValues(self.bw, chrom, start, end, int(includeNA))
+        intervals = lib.bwGetValues(self.bw, chrom.encode(), start, end, int(includeNA))
         a = array.array('f')
         if intervals.l != 0:
             a.fromstring(ffi.buffer(intervals.value[0:intervals.l]))
@@ -63,7 +63,7 @@ class BigWig(object):
         ops = ("mean", "std", "max", "min", "coverage")
         assert stat in ops, stat
         itype = ops.index(stat)
-        res = lib.bwStats(self.bw, chrom, start, end, nBins, itype)
+        res = lib.bwStats(self.bw, chrom.encode(), start, end, nBins, itype)
         a = array.array('d')
         a.fromstring(ffi.buffer(res[0:nBins]))
         ffi.gc(res, lib.free)
