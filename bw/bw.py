@@ -32,6 +32,8 @@ class BigWig(object):
     >>> b.stats("1", 0, 4, stat="coverage", nBins=2)
     array('d', [1.0, 0.5])
 
+    #b.stats("chr1", 0, 10)
+
     >>> b.close()
     """
 
@@ -54,7 +56,7 @@ class BigWig(object):
     def values(self, chrom, start, end, includeNA=True):
         intervals = lib.bwGetValues(self.bw, chrom.encode(), start, end, int(includeNA))
         a = array.array('f')
-        if intervals.l != 0:
+        if intervals != ffi.NULL and intervals.l != 0:
             a.fromstring(ffi.buffer(intervals.value[0:intervals.l]))
         lib.bwDestroyOverlappingIntervals(intervals)
         return a
@@ -64,6 +66,8 @@ class BigWig(object):
         assert stat in ops, stat
         itype = ops.index(stat)
         res = lib.bwStats(self.bw, chrom.encode(), start, end, nBins, itype)
+        if res == ffi.NULL:
+            return [] if nBins > 1 else None
         a = array.array('d')
         a.fromstring(ffi.buffer(res[0:nBins]))
         ffi.gc(res, lib.free)
