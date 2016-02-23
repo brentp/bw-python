@@ -49,7 +49,7 @@ typedef struct {
 } bwOverlappingIntervals_t;
 
 
-bigWigFile_t *bwOpen(char *fname, CURLcode (*callBack)(CURL*));
+bigWigFile_t *bwOpen(char *fname, CURLcode (*callBack)(CURL*), const char* mode);
 void bwClose(bigWigFile_t *fp);
 
 bwOverlappingIntervals_t *bwGetValues(bigWigFile_t *fp, char *chrom, uint32_t start, uint32_t end, int includeNA);
@@ -69,6 +69,9 @@ enum bwStatsType {
 };
 
 double *bwStats(bigWigFile_t *fp, char *chrom, uint32_t start, uint32_t end, uint32_t nBins, enum bwStatsType type);
+
+
+uint32_t bwGetTid(bigWigFile_t *fp, char *chrom);
 
 void free(void *);
 
