@@ -14,7 +14,7 @@ def arr_equal(aa, bb):
 
 def test_seqs():
     b = BigWig("libBigWig/test/test.bw")
-    assert b.chroms == ['1', '10'], b.chroms
+    assert b.chroms == [('1', 195471971), ('10', 130694993)], b.chroms
 
 def test_bw():
     b = BigWig("libBigWig/test/test.bw")
