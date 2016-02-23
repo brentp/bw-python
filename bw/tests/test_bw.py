@@ -12,6 +12,10 @@ def arr_equal(aa, bb):
         else:
             assert a == bb[i]
 
+def test_seqs():
+    b = BigWig("libBigWig/test/test.bw")
+    assert b.chroms == ['1', '10'], b.chroms
+
 def test_bw():
     b = BigWig("libBigWig/test/test.bw")
 

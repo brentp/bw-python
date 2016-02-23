@@ -44,6 +44,11 @@ class BigWig(object):
     def close(self):
         return lib.bwClose(self.bw)
 
+    @property
+    def chroms(self):
+        seqs = self.bw.cl
+        return [ffi.string(seqs.chrom[i]) for i in range(seqs.nKeys)]
+
     def __repr__(self):
         return "%s('%s')" % (self.__class__.__name__, self.path)
 

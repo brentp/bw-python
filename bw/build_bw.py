@@ -34,11 +34,21 @@ ffi.cdef(open("{path}/bw/curl_constants.h".format(path=HERE)).read())
 ffi.cdef("""
 typedef void CURL;
 
+typedef struct {
+    int64_t nKeys; /**<The number of chromosomes */
+    char **chrom; /**<A list of null terminated chromosomes */
+    uint32_t *len; /**<The lengths of each chromosome */
+} chromList_t;
+
 typedef struct { ...; } bwRTree_t;
 typedef struct { ...; } URL_t;
 typedef struct { ...; } bwOverlapBlock_t;
 typedef struct { ...; } bwRTreeNode_t;
-typedef struct { ...; } bigWigFile_t;
+typedef struct {
+    chromList_t *cl;
+    ...;
+} bigWigFile_t;
+
 
 typedef struct {
     uint32_t l; /**<Number of intervals held*/

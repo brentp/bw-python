@@ -7,7 +7,7 @@
  *
  * \section Introduction
  *
- * libBigWig is a C library for parsing local/remote bigWig files. This is similar to Kent's library from UCSC, except 
+ * libBigWig is a C library for parsing local/remote bigWig files. This is similar to Kent's library from UCSC, except
  *  * The license is much more liberal
  *  * This code doesn't call `exit()` on error, thereby killing the calling application.
  *
@@ -26,10 +26,10 @@
  * There are three methods for storing values in a bigWig file, further described in the [wiggle format](http://genome.ucsc.edu/goldenpath/help/wiggle.html). The entries within the file are grouped into "blocks" and each such block is limited to storing entries of a single type. So, it is unwise to use a single bedGraph-like endtry followed by a single fixed-step entry followed by a variable-step entry, as that would require three separate blocks, with additional space required for each.
  *
  * \section Examples
- * 
+ *
  * Please see [README.md](README.md) and the files under `test/` for examples.
  */
- 
+
 
 /*! \file bigWig.h
  *
@@ -323,7 +323,7 @@ int bwWriteHdr(bigWigFile_t *bw);
  * Adds entries of the form:
  * chromosome	start	end	value
  * to the file. These will always be added in a new block, so you may have previously used a different storage type.
- * 
+ *
  * In general it's more efficient to use the bwAppend* functions, but then you MUST know that the previously written block is of the same type. In other words, you can only use bwAppendIntervals() after bwAddIntervals() or a previous bwAppendIntervals().
  * @param fp The output file pointer.
  * @param chrom A list of chromosomes, of length `n`.

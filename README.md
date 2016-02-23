@@ -33,6 +33,9 @@ array('f', [0.10000000149011612, 0.20000000298023224, 0.30000001192092896])
 >>> b.stats("1", 0, 4, stat="coverage", nBins=2)
 array('d', [1.0, 0.5])
 
+# get the chromosomes:
+>>> b.chroms
+['1', '10']
 
 >>> b.close()
 ```
