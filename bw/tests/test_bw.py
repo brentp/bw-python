@@ -40,7 +40,7 @@ def test_bw():
     v = b.stats("1", 0, 9)
     assert v == 0.2000000054637591
 
-    v = b.stats("1", 0, 9, stat="std")
+    v = b.stats("1", 0, 9, stat="stdev")
     assert v == 0.10000000521540645
 
     v = b.stats("1", 0, 4, stat="coverage")

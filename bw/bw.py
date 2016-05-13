@@ -24,7 +24,7 @@ class BigWig(object):
     >>> b.stats("1", 0, 9)
     0.2000000054637591
 
-    >>> b.stats("1", 0, 9, stat="std")
+    >>> b.stats("1", 0, 9, stat="stdev")
     0.10000000521540645
 
     >>> b.stats("1", 0, 4, stat="coverage")
@@ -67,7 +67,7 @@ class BigWig(object):
         return a
 
     def stats(self, chrom, start, end, stat="mean", nBins=1):
-        ops = ("mean", "std", "max", "min", "coverage")
+        ops = ("mean", "stdev", "max", "min", "coverage")
         assert stat in ops, stat
         itype = ops.index(stat)
         res = lib.bwStats(self.bw, chrom.encode(), start, end, nBins, itype)
